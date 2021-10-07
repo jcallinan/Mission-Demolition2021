@@ -87,9 +87,33 @@ public class ProjectileLine : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+ 
+    void FixedUpdate()
     {
-        
+        if ( poi == null)
+        {
+            // if there is no poi, search for one
+            if (FollowCam.POI != null)
+            {
+                if (FollowCam.POI.tag == "Projectile")
+                {
+                    poi = FollowCam.POI;
+                } else
+                {
+                    return;
+                }
+            } else
+            {
+                return;
+            }
+        }
+        // if there is a POI, it's loc is added every FixedUpdate
+        AddPoint();
+        if (FollowCam.POI == null)
+        {
+            poi = null;
+        }
+
+
     }
 }
